@@ -13,18 +13,19 @@ namespace CrudPeliculas_RazorPages_EntityFramework.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         public List<Pelicula> peliculas;
-        public IndexModel(ILogger<IndexModel> logger)
+        private readonly DbPeliculasContext _dbPeliculasContext;
+        public IndexModel(ILogger<IndexModel> logger, DbPeliculasContext dbPeliculasContext)
         {
             _logger = logger;
-            using (var db = new dbPeliculasContext())
-            {
-                peliculas = db.Peliculas.ToList();
-            }
-            
+            _dbPeliculasContext = dbPeliculasContext;
+
+
         }
 
         public void OnGet()
         {
+
+            peliculas = _dbPeliculasContext.Peliculas.ToList();
 
         }
     }

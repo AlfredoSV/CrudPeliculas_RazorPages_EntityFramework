@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using CrudPeliculas_RazorPages_EntityFramework.Data;
 
 namespace CrudPeliculas_RazorPages_EntityFramework
 {
@@ -24,6 +26,7 @@ namespace CrudPeliculas_RazorPages_EntityFramework
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddDbContext<DbPeliculasContext>(options => options.UseSqlServer(Configuration.GetConnectionString("db")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

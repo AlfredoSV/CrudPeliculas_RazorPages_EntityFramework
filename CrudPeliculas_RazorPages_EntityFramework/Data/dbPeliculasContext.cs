@@ -6,26 +6,26 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CrudPeliculas_RazorPages_EntityFramework.Data
 {
-    public partial class dbPeliculasContext : DbContext
+    public partial class DbPeliculasContext : DbContext
     {
-        public dbPeliculasContext()
+        public DbPeliculasContext()
         {
         }
 
-        public dbPeliculasContext(DbContextOptions<dbPeliculasContext> options)
+        public DbPeliculasContext(DbContextOptions<DbPeliculasContext> options)
             : base(options)
         {
         }
 
         public virtual DbSet<Pelicula> Peliculas { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=DESKTOP-GUSKUDA;Database=dbPeliculas;Trusted_Connection=True;");
             }
-        }
+        }*/
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
