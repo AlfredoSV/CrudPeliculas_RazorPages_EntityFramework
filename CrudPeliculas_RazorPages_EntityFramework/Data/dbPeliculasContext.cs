@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CrudPeliculas_RazorPages_EntityFramework.Data
 {
-    public partial class DbPeliculasContext : DbContext
+    public partial class dbPeliculasContext : DbContext
     {
-        public DbPeliculasContext()
+        public dbPeliculasContext()
         {
         }
 
-        public DbPeliculasContext(DbContextOptions<DbPeliculasContext> options)
+        public dbPeliculasContext(DbContextOptions<dbPeliculasContext> options)
             : base(options)
         {
         }
@@ -23,6 +23,7 @@ namespace CrudPeliculas_RazorPages_EntityFramework.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Server=DESKTOP-GUSKUDA;Database=dbPeliculas;Trusted_Connection=True;");
             }
         }*/
@@ -33,15 +34,11 @@ namespace CrudPeliculas_RazorPages_EntityFramework.Data
 
             modelBuilder.Entity<Pelicula>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("peliculas");
 
-                entity.Property(e => e.Duracion).HasColumnName("duracion");
+                entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
+                entity.Property(e => e.Duracion).HasColumnName("duracion");
 
                 entity.Property(e => e.Titulo)
                     .IsRequired()

@@ -4,11 +4,37 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<div class="container">
 
-    @foreach (var pel in Model.peliculas)
-    {
-        @pel.Titulo
-    }
+    <a class="btn btn-info mb-2" asp-page="CrearPelicula">Crear nuevo</a>
+    <table class="table">
+        <thead class=thead-dark>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Titulo
+                </th>
+                <th>
+                    Duración
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pel in Model.peliculas)
+            {
+                <tr>
+                    <td>@pel.Id</td>
+                    <td>@pel.Titulo</td>
+                    <td>@pel.Duracion</td>
+                </tr>
+               
+            }
+        </tbody>
+
+    </table>
+
+   
 
 </div>
