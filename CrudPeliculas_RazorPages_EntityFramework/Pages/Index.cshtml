@@ -2,39 +2,88 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+
 }
 
-<div class="container">
 
-    <a class="btn btn-info mb-2" asp-page="CrearPelicula">Crear nuevo</a>
-    <table class="table">
-        <thead class=thead-dark>
-            <tr>
-                <th>
-                    Id
-                </th>
-                <th>
-                    Titulo
-                </th>
-                <th>
-                    Duración
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var pel in Model.peliculas)
-            {
-                <tr>
-                    <td>@pel.Id</td>
-                    <td>@pel.Titulo</td>
-                    <td>@pel.Duracion</td>
-                </tr>
-               
-            }
-        </tbody>
+@if (ViewBag.Accion != null)
+{
 
-    </table>
+    if (ViewData["Accion"].Equals("Listar"))
+    {
+        <div class="container">
 
-   
+            <a class="btn btn-info mb-2" asp-page-handler="Nuevo">Crear nuevo</a>
+            <table class="table">
+                <thead class=thead-dark>
+                    <tr>
+                        <th>
+                            Id
+                        </th>
+                        <th>
+                            Titulo
+                        </th>
+                        <th>
+                            Duración
+                        </th>
+                        <th>
+                            Acciones
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pel in Model.peliculas)
+                    {
+                    <tr>
+                        <td>@pel.Id</td>
+                        <td>@pel.Titulo</td>
+                        <td>@pel.Duracion</td>
+                        <td><a asp-page-handler="Editar" asp-route-id="@pel.Id">Editar</a> |
+                            <a asp-page-handler="Elimiar" asp-route-id="@pel.Id">Editar</a></td>
+                        
+                    </tr>
 
-</div>
+                    }
+                </tbody>
+
+            </table>
+
+
+
+        </div>
+
+    }
+    if (ViewData["Accion"].Equals("Nuevo"))
+    {
+        <div class="container">
+            <h1>Crear nueva pelicula</h1>
+
+            <form method="post" asp-page-handler="Crear">
+
+                <div class="form-group">
+                    <input type="text" asp-for="Pelicula.Titulo" class="form-control" placeholder="Titulo" />
+                    <span asp-validation-for="Pelicula.Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+
+                    <input type="number" asp-for="Pelicula.Duracion" class="form-control" placeholder="Duración" />
+                    <span asp-validation-for="Pelicula.Duracion" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" />
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+    }
+}
+
+
+
