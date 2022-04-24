@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Inicio";
 
 }
 
@@ -32,16 +32,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var pel in Model.peliculas)
+                    @foreach (var pel in Model.Peliculas)
                     {
-                    <tr>
-                        <td>@pel.Id</td>
-                        <td>@pel.Titulo</td>
-                        <td>@pel.Duracion</td>
-                        <td><a asp-page-handler="Editar" asp-route-id="@pel.Id">Editar</a> |
-                            <a asp-page-handler="Elimiar" asp-route-id="@pel.Id">Editar</a></td>
-                        
-                    </tr>
+                        <tr>
+                            <td>@pel.Id</td>
+                            <td>@pel.Titulo</td>
+                            <td>@pel.Duracion</td>
+                            <td>
+                                <a asp-page-handler="Editar" asp-route-id="@pel.Id">Editar</a> |
+                                <a asp-page-handler="Elimiar" class="text-danger" asp-route-id="@pel.Id">Elimar</a>
+                            </td>
+
+                        </tr>
 
                     }
                 </tbody>
@@ -74,7 +76,40 @@
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-success" />
+                    <a href="/" class="btn btn-danger">Cancelar</a>
+                </div>
 
+
+            </form>
+
+
+        </div>
+    }
+
+
+    if (ViewData["Accion"].Equals("Editar"))
+    {
+        <div class="container">
+            <h1>Editar pelicula</h1>
+
+            <form method="post" asp-page-handler="Editar">
+                <input asp-for="Pelicula.Id" type="hidden" />
+
+                <div class="form-group">
+                    <input type="text" asp-for="Pelicula.Titulo" class="form-control" placeholder="Titulo" />
+                    <span asp-validation-for="Pelicula.Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+
+                    <input type="number" asp-for="Pelicula.Duracion" class="form-control" placeholder="Duración" />
+                    <span asp-validation-for="Pelicula.Duracion" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <input type="submit" value="Editar" class="btn btn-secondary" />
+                    <a href="/" class="btn btn-danger">Cancelar</a>
                 </div>
 
 
