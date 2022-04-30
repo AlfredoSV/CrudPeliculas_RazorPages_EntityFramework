@@ -50,7 +50,74 @@
 
             </table>
 
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
 
+                    @if (Model.Anterior)
+                    {
+
+                        <li class="page-item">
+                            <a class="page-link" asp-page-handler="/" asp-route-pagina="@(Model.Pagina_Actual-1)" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                        </li>
+
+                    }
+
+
+                    @for (int i = Model.Min_Bloque; i <= (Model.Total_Paginas <= Model.Max_Bloque ? Model.Total_Paginas : Model.Max_Bloque); i++)
+                    {
+                        @if (i == Model.Pagina_Actual)
+                        {
+                            <li class="page-item active"><a asp-route-pagina="@i" class="page-link" asp-page-handler="/">@i</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a asp-route-pagina="@i" class="page-link" asp-page-handler="/">@i</a></li>
+                        }
+
+
+                    }
+
+
+
+                    @if (Model.Siguiente)
+                    {
+
+
+                        <li class="page-item">
+                            <a class="page-link" asp-page-handler="/" asp-route-pagina="@(Model.Pagina_Actual+1)" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </li>
+                    }
+
+
+
+
+                </ul>
+            </nav>
 
         </div>
 
