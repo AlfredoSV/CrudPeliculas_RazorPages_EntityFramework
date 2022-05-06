@@ -6,186 +6,118 @@
 }
 
 
-@if (ViewBag.Accion != null)
-{
 
-    if (ViewData["Accion"].Equals("Listar"))
-    {
-        <div class="container">
+<div class="container">
 
-            <a class="btn btn-info mb-2" asp-page-handler="Nuevo">Crear nuevo</a>
-            <table class="table">
-                <thead class=thead-dark>
-                    <tr>
-                        <th>
-                            Id
-                        </th>
-                        <th>
-                            Titulo
-                        </th>
-                        <th>
-                            Duración
-                        </th>
-                        <th>
-                            Acciones
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var pel in Model.Peliculas)
-                    {
-                        <tr>
-                            <td>@pel.Id</td>
-                            <td>@pel.Titulo</td>
-                            <td>@pel.Duracion</td>
-                            <td>
-                                <a asp-page-handler="Editar" asp-route-id="@pel.Id">Editar</a> |
-                                <a asp-page-handler="Elimiar" class="text-danger" asp-route-id="@pel.Id">Elimar</a>
-                            </td>
+    <a class="btn btn-info mb-2" asp-page="/Nuevo">Crear nuevo</a>
+    <table class="table">
+        <thead class=thead-dark>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Titulo
+                </th>
+                <th>
+                    Duración
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pel in Model.Peliculas)
+            {
+                <tr>
+                    <td>@pel.Id</td>
+                    <td>@pel.Titulo</td>
+                    <td>@pel.Duracion</td>
+                    <td>
+                        <a asp-page="/Editar" asp-route-id="@pel.Id">Editar</a> |
+                        <a asp-page-handler="Elimiar" class="text-danger" asp-route-id="@pel.Id">Elimar</a>
+                    </td>
 
-                        </tr>
+                </tr>
 
-                    }
-                </tbody>
+            }
+        </tbody>
 
-            </table>
+    </table>
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
 
-                    @if (Model.Anterior)
-                    {
+            @if (Model.Anterior)
+            {
 
-                        <li class="page-item">
-                            <a class="page-link" asp-page-handler="/" asp-route-pagina="@(Model.Pagina_Actual-1)" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Anterior</span>
-                            </a>
-                        </li>
+                <li class="page-item">
+                    <a class="page-link" asp-page-handler="/" asp-route-pagina="@(Model.Pagina_Actual-1)" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                </li>
 
-                    }
-                    else
-                    {
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Anterior</span>
-                            </a>
-                        </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                </li>
 
-                    }
+            }
 
 
-                    @for (int i = Model.Min_Bloque; i <= (Model.Total_Paginas <= Model.Max_Bloque ? Model.Total_Paginas : Model.Max_Bloque); i++)
-                    {
-                        @if (i == Model.Pagina_Actual)
-                        {
-                            <li class="page-item active"><a asp-route-pagina="@i" class="page-link" asp-page-handler="/">@i</a></li>
-                        }
-                        else
-                        {
-                            <li class="page-item"><a asp-route-pagina="@i" class="page-link" asp-page-handler="/">@i</a></li>
-                        }
+            @for (int i = Model.Min_Bloque; i <= (Model.Total_Paginas <= Model.Max_Bloque ? Model.Total_Paginas : Model.Max_Bloque); i++)
+            {
+                @if (i == Model.Pagina_Actual)
+                {
+                    <li class="page-item active"><a asp-route-pagina="@i" class="page-link" asp-page-handler="/">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a asp-route-pagina="@i" class="page-link" asp-page-handler="/">@i</a></li>
+                }
 
 
-                    }
+            }
 
 
 
-                    @if (Model.Siguiente)
-                    {
+            @if (Model.Siguiente)
+            {
 
 
-                        <li class="page-item">
-                            <a class="page-link" asp-page-handler="/" asp-route-pagina="@(Model.Pagina_Actual+1)" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Siguiente</span>
-                            </a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Siguiente</span>
-                            </a>
-                        </li>
-                    }
+                <li class="page-item">
+                    <a class="page-link" asp-page-handler="/" asp-route-pagina="@(Model.Pagina_Actual+1)" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Siguiente</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Siguiente</span>
+                    </a>
+                </li>
+            }
 
 
 
 
-                </ul>
-            </nav>
+        </ul>
+    </nav>
 
-        </div>
-
-    }
-    if (ViewData["Accion"].Equals("Nuevo"))
-    {
-        <div class="container">
-            <h1>Crear nueva pelicula</h1>
-
-            <form method="post" asp-page-handler="Crear">
-
-                <div class="form-group">
-                    <input type="text" asp-for="Pelicula.Titulo" class="form-control" placeholder="Titulo" />
-                    <span asp-validation-for="Pelicula.Titulo" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-
-                    <input type="number" asp-for="Pelicula.Duracion" class="form-control" placeholder="Duración" />
-                    <span asp-validation-for="Pelicula.Duracion" class="text-danger"></span>
-                </div>
+</div>
 
 
-                <div class="form-group">
-                    <input type="submit" class="btn btn-success" />
-                    <a href="/" class="btn btn-danger">Cancelar</a>
-                </div>
-
-
-            </form>
-
-
-        </div>
-    }
-
-
-    if (ViewData["Accion"].Equals("Editar"))
-    {
-        <div class="container">
-            <h1>Editar pelicula</h1>
-
-            <form method="post" asp-page-handler="Editar">
-                <input asp-for="Pelicula.Id" type="hidden" />
-
-                <div class="form-group">
-                    <input type="text" asp-for="Pelicula.Titulo" class="form-control" placeholder="Titulo" />
-                    <span asp-validation-for="Pelicula.Titulo" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-
-                    <input type="number" asp-for="Pelicula.Duracion" class="form-control" placeholder="Duración" />
-                    <span asp-validation-for="Pelicula.Duracion" class="text-danger"></span>
-                </div>
-
-
-                <div class="form-group">
-                    <input type="submit" value="Editar" class="btn btn-secondary" />
-                    <a href="/" class="btn btn-danger">Cancelar</a>
-                </div>
-
-
-            </form>
-
-
-        </div>
-    }
-}
 
 
 

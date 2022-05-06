@@ -1,0 +1,33 @@
+﻿@page
+@model CrudPeliculas_RazorPages_EntityFramework.Pages.Shared.NuevoModel
+@{
+    ViewData["Title"] = "Nuevo";
+}
+
+<div class="container">
+    <h1>Crear nueva pelicula</h1>
+
+    <form method="post" asp-page-handler="Crear">
+
+        <div class="form-group">
+            <input type="text" asp-for="Pelicula.Titulo" class="form-control" placeholder="Titulo" />
+            <span asp-validation-for="Pelicula.Titulo" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+
+            <input type="number" asp-for="Pelicula.Duracion" class="form-control" placeholder="Duración" />
+            <span asp-validation-for="Pelicula.Duracion" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" />
+            <a href="/" class="btn btn-danger">Cancelar</a>
+        </div>
+
+
+    </form>
+
+
+</div>
